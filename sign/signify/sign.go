@@ -66,22 +66,25 @@ type rawSignature struct {
 	Signature   [ed25519.SignatureSize]byte
 }
 
-func ReadFile(r io.Reader) (comment string, content []byte, err error) {
+func ReadFile(r io.Reader) (comment string, content []byte, err error, bytesRead int) {
 	sc := bufio.NewScanner(r)
 
 	if !sc.Scan() {
-		return "", nil, fmt.Errorf("signify: read error %s", sc.Err())
+		return "", nil, fmt.Errorf("signify: read error %s", sc.Err()), bytesRead
 	}
 	comment = sc.Text()
+	bytesRead += len([]byte(comment)) + 1
 	if !strings.HasPrefix(comment, commentHdr) {
-		return "", nil, errors.New("signify: missing header")
+		return "", nil, errors.New("signify: missing header"), bytesRead
 	}
 	comment = comment[len(commentHdr):]
 
 	if !sc.Scan() {
-		return "", nil, fmt.Errorf("signify: read error %s", sc.Err())
+		return "", nil, fmt.Errorf("signify: read error %s", sc.Err()), bytesRead
 	}
-	content, err = base64.StdEncoding.DecodeString(sc.Text())
+	contentRb := sc.Text()
+	bytesRead += len([]byte(contentRb)) + 1
+	content, err = base64.StdEncoding.DecodeString(contentRb)
 
 	return
 }

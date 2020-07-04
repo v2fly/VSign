@@ -4,8 +4,11 @@ import (
 	"bytes"
 	"crypto/rand"
 	"encoding/base64"
+	"errors"
 	"github.com/xiaokangwang/VSign/sign/signify"
 	"golang.org/x/crypto/sha3"
+	"io"
+	"io/ioutil"
 )
 
 func GenerateKeyFromSeed(seed string, password string) ([]byte, []byte) {
@@ -37,3 +40,30 @@ func Sign(key []byte, password string, msg []byte) ([]byte, error) {
 	outb.Close()
 	return out.Bytes(), nil
 }
+
+func VerifyAndReturn(key []byte, data io.Reader) ([]byte, error) {
+	signatureData, err := ioutil.ReadAll(data)
+	if err != nil {
+		return nil, err
+	}
+	_, datav, err, readed := signify.ReadFile(bytes.NewReader(signatureData))
+	if err != nil {
+		return nil, err
+	}
+
+	signature, err := signify.ParseSignature(datav)
+	if err != nil {
+		return nil, err
+	}
+	publickey, err := signify.ParsePublicKey(key)
+	if err != nil {
+		return nil, err
+	}
+	ok := signify.Verify(publickey, signatureData[readed:], signature)
+	if ok {
+		return signatureData[readed:], nil
+	}
+	return nil, ErrSignatureMismatch
+}
+
+var ErrSignatureMismatch = errors.New("ErrSignatureMismatch")
