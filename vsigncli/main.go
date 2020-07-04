@@ -6,6 +6,7 @@ import (
 	"github.com/xiaokangwang/VSign/insmgr"
 	"github.com/xiaokangwang/VSign/instimp"
 	"github.com/xiaokangwang/VSign/sign"
+	"github.com/xiaokangwang/VSign/signerVerify"
 	"io"
 	"io/ioutil"
 	"os"
@@ -61,11 +62,19 @@ func main() {
 		}
 		return
 	case "check":
-		switch os.Args[1+argoffset] {
-		case "version":
-		case "project":
-		case "file":
+		sigfile := os.Args[1+argoffset]
+		fileslist := os.Args[2+argoffset:]
+		file, err := os.Open(sigfile)
+		if err != nil {
+			fmt.Printf("Unable to open signature file %v\n", file)
+			os.Exit(-1)
 		}
+		err = signerVerify.OutputAndJudge(signerVerify.CheckSignaturesV2Fly(file, fileslist))
+		file.Close()
+		if err != nil {
+			os.Exit(-2)
+		}
+		os.Exit(0)
 		return
 
 	}
