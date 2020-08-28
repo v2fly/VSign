@@ -84,7 +84,7 @@ func (u unpackedAttrib) IsTail() bool {
 	return u.isTail
 }
 func (u *unpackedAttrib) Parse() *unpackedAttrib {
-	var re = regexp.MustCompile(`^(\|)?((?:[a-zA-Z0-9\-./_]){0,128})(?:(#|!)#)((?:[a-zA-Z0-9]){0,16})(?:\.((?:[a-zA-Z0-9.]){0,16}))?=((?:[a-z0-9]){0,5}?)=((?:.){0,650})$`)
+	var re = regexp.MustCompile(`^(\|)?((?:[a-zA-Z0-9\-./_@]){0,128})(?:(#|!)#)((?:[a-zA-Z0-9]){0,16})(?:\.((?:[a-zA-Z0-9.]){0,16}))?=((?:[a-z0-9]){0,5}?)=((?:.){0,650})$`)
 	res := re.FindStringSubmatch(u.filename)
 
 	u.isTail = res[1] == "|"
