@@ -1,6 +1,6 @@
 package signerVerify
 
-import "github.com/xiaokangwang/VSign/instructions"
+import "github.com/v2fly/VSign/instructions"
 
 func CheckAsClient(ins []instructions.Instruction, project string, invert bool) (map[string]string, string, bool) {
 	var correctProject bool

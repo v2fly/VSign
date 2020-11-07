@@ -3,8 +3,8 @@ package signerVerify
 import (
 	"bytes"
 	"errors"
-	"github.com/xiaokangwang/VSign/insmgr"
-	"github.com/xiaokangwang/VSign/sign"
+	"github.com/v2fly/VSign/insmgr"
+	"github.com/v2fly/VSign/sign"
 	"io"
 )
 

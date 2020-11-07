@@ -1,7 +1,7 @@
 package insmgr
 
 import (
-	"github.com/xiaokangwang/VSign/instructions"
+	"github.com/v2fly/VSign/instructions"
 )
 
 type HashCollectorMgr struct {

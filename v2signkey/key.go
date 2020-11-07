@@ -2,7 +2,7 @@ package v2signkey
 
 import (
 	"bytes"
-	"github.com/xiaokangwang/VSign/sign/signify"
+	"github.com/v2fly/VSign/sign/signify"
 )
 
 const V2FlySigningKey = `untrusted comment: V2Fly Signing Key

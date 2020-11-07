@@ -2,9 +2,9 @@ package signerVerify
 
 import (
 	"fmt"
-	"github.com/xiaokangwang/VSign/insmgr"
-	"github.com/xiaokangwang/VSign/instimp"
-	"github.com/xiaokangwang/VSign/v2signkey"
+	"github.com/v2fly/VSign/insmgr"
+	"github.com/v2fly/VSign/instimp"
+	"github.com/v2fly/VSign/v2signkey"
 	"io"
 )
 

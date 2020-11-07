@@ -1,6 +1,6 @@
 package instimp
 
-import "github.com/xiaokangwang/VSign/instructions"
+import "github.com/v2fly/VSign/instructions"
 
 type SimpleFilenameKeyValueInst struct {
 	assocFilename string

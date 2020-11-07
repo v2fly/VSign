@@ -1,4 +1,4 @@
-module github.com/xiaokangwang/VSign
+module github.com/v2fly/VSign
 
 go 1.14
 

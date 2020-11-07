@@ -2,7 +2,7 @@ package insmgr
 
 import (
 	"bufio"
-	"github.com/xiaokangwang/VSign/instructions"
+	"github.com/v2fly/VSign/instructions"
 	"io"
 )
 
